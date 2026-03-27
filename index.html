@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>报名申请</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>活动报名申请</h1>
+      <p class="sub">请填写信息，我们会尽快联系你。</p>
+    </header>
+
+    <main class="card">
+      <!-- 步骤指示条 -->
+      <div class="steps">
+        <div class="step active" id="step-indicator-1">
+          <div class="step-dot">1</div>
+          <span>基本信息</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" id="step-indicator-2">
+          <div class="step-dot">2</div>
+          <span>报名信息</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step" id="step-indicator-3">
+          <div class="step-dot">3</div>
+          <span>个人经历</span>
+        </div>
+      </div>
+
+      <form id="signupForm" novalidate>
+
+        <!-- ===== 第一步 ===== -->
+        <div id="step1">
+        <div class="grid">
+          <div class="field">
+            <label for="fullName">姓名 <span class="req">*</span></label>
+            <input id="fullName" name="fullName" type="text" placeholder="例如：张三" required />
+            <p class="hint" data-error-for="fullName"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">邮箱 <span class="req">*</span></label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" required />
+            <p class="hint" data-error-for="email"></p>
+          </div>
+
+          <div class="field">
+            <label for="phone">手机号</label>
+            <input id="phone" name="phone" type="tel" placeholder="选填" />
+            <p class="hint" data-error-for="phone"></p>
+          </div>
+
+          <div class="field full">
+            <label>项目所属公司 <span class="req">*</span></label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="companyLocation" value="在中国大陆" required />
+                <span>在中国大陆</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="companyLocation" value="在海外（含港澳台）" />
+                <span>在海外（含港澳台）</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="companyLocation" value="尚未成立公司" />
+                <span>尚未成立公司</span>
+              </label>
+            </div>
+            <p class="hint" data-error-for="companyLocation"></p>
+          </div>
+
+          <!-- 条件面板：在中国大陆 -->
+          <div class="field full conditional-panel" id="panel-mainland" style="display:none;">
+            <label for="companyName">公司名称 <span class="req">*</span></label>
+            <input id="companyName" name="companyName" type="text" placeholder="请输入公司全称" />
+            <p class="hint" data-error-for="companyName"></p>
+          </div>
+
+          <!-- 条件面板：在海外（含港澳台） -->
+          <div class="conditional-panel" id="panel-overseas" style="display:none;">
+            <div class="field full">
+              <label>项目所在区域或公司所在地 <span class="req">*</span></label>
+              <div class="region-row">
+                <div class="region-col">
+                  <select id="continent" name="continent">
+                    <option value="">请选择洲…</option>
+                    <option value="亚洲">亚洲</option>
+                    <option value="欧洲">欧洲</option>
+                    <option value="北美洲">北美洲</option>
+                    <option value="南美洲">南美洲</option>
+                    <option value="非洲">非洲</option>
+                    <option value="大洋洲">大洋洲</option>
+                  </select>
+                </div>
+                <div class="region-col">
+                  <select id="country" name="country" disabled>
+                    <option value="">请先选择洲…</option>
+                  </select>
+                </div>
+              </div>
+              <p class="hint" data-error-for="region"></p>
+            </div>
+            <div class="field full">
+              <label for="companyNameOverseas">公司名称 <span class="req">*</span></label>
+              <input id="companyNameOverseas" name="companyNameOverseas" type="text" placeholder="请输入公司全称" />
+              <p class="hint" data-error-for="companyNameOverseas"></p>
+            </div>
+            <div class="field full">
+              <label for="officeAddress">办公地址 <span class="req">*</span></label>
+              <input id="officeAddress" name="officeAddress" type="text" placeholder="请输入办公地址" />
+              <p class="hint" data-error-for="officeAddress"></p>
+            </div>
+          </div>
+
+          <!-- 条件面板：尚未成立公司 -->
+          <div class="field full conditional-panel" id="panel-nocompany" style="display:none;">
+            <label>项目所在区域或公司所在地 <span class="req">*</span></label>
+            <div class="region-row">
+              <div class="region-col">
+                <select id="continent2" name="continent2">
+                  <option value="">请选择洲…</option>
+                  <option value="亚洲">亚洲</option>
+                  <option value="欧洲">欧洲</option>
+                  <option value="北美洲">北美洲</option>
+                  <option value="南美洲">南美洲</option>
+                  <option value="非洲">非洲</option>
+                  <option value="大洋洲">大洋洲</option>
+                </select>
+              </div>
+              <div class="region-col">
+                <select id="country2" name="country2" disabled>
+                  <option value="">请先选择洲…</option>
+                </select>
+              </div>
+            </div>
+            <p class="hint" data-error-for="region2"></p>
+          </div>
+
+          <!-- 期别 & 组别选择（下一步时自动填充） -->
+          <div class="field full">
+            <div class="selection-box" id="selectionBox" style="display:none;">
+
+              <!-- 期别 -->
+              <div class="sel-section">
+                <span class="selection-label">可以选择的期别 <span class="req">*</span></span>
+                <div class="seg-cards" id="phaseGroup">
+
+                  <div class="seg-card" id="phaseGrowthCard">
+                    <button type="button" class="seg-card-btn" id="phaseGrowth" data-value="成长期">成长期</button>
+                    <p class="seg-card-warn" id="phaseGrowthWarn" style="display:none;">不能选择成长期，填写的信息不符合成长期报名条件</p>
+                    <p class="seg-card-desc">成长期项目是指于 2016 年 1 月 1 日至 2025 年 12 月 31 日间在北京注册公司的项目。</p>
+                  </div>
+
+                  <div class="seg-card" id="phaseMakerCard">
+                    <button type="button" class="seg-card-btn" id="phaseMaker" data-value="创客期">创客期</button>
+                    <p class="seg-card-warn" id="phaseMakerWarn" style="display:none;">不能选择创客期，填写的信息不符合创客期报名条件</p>
+                    <p class="seg-card-desc">创客期项目是指：<br>1、尚未在京注册公司的项目；<br>2、2026 年 1 月 1 日（含）后在京注册公司的项目。</p>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- 组别 -->
+              <div class="sel-section">
+                <span class="selection-label">可以选择的组别 <span class="req">*</span></span>
+                <div class="seg-cards" id="groupGroup">
+
+                  <div class="seg-card" id="groupOverseasCard">
+                    <button type="button" class="seg-card-btn" id="groupOverseas" data-value="海外组">海外组</button>
+                    <p class="seg-card-desc">参赛人或参赛团队所有成员均应在海外取得学位或在海外学习、工作、创业 1 年以上，回国（或来华）时间不超过 10 年（2016 年 1 月 1 日以后）。<br><br><strong>海外组对参赛人持股比例的要求：</strong><br><br>以个人名义参赛的，参赛人应为在京创立公司的主要创始人、第一大自然人股东且持股比例不低于 30%（穿透合并计算后）；以团队名义参赛的，主参赛人应为在京创立公司的主要创始人、第一大自然人股东，团队成员均应在京创立公司持有股权且每人持股比例不低于 5%、团队成员合计持股比例不低于 50%（穿透合并计算后）。</p>
+                  </div>
+
+                  <div class="seg-card" id="groupLocalCard">
+                    <button type="button" class="seg-card-btn" id="groupLocal" data-value="本土组">本土组</button>
+                    <p class="seg-card-desc">参赛人和参赛团队成员无海外经历要求，有无海外经历均可报名。<br><br><strong>本土组对参赛人持股比例的要求：</strong><br><br>以个人名义参赛的，参赛人应为在京创立公司的主要创始人、第一大自然人股东且持股比例不低于 20%（穿透合并计算后）；以团队名义参赛的，主参赛人应为在京创立公司的主要创始人、第一大自然人股东，团队成员均应在京创立公司持有股权且每人持股比例不低于 5%、团队成员合计持股比例不低于 30%（穿透合并计算后）。</p>
+                  </div>
+
+                </div>
+              </div>
+
+              <input type="hidden" id="selectedPhase" name="selectedPhase" />
+              <input type="hidden" id="selectedGroup" name="selectedGroup" />
+              <p class="hint" data-error-for="selectionBox"></p>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label class="checkbox">
+              <input id="agree" name="agree" type="checkbox" required />
+              <span>我同意提交上述信息用于报名审核 <span class="req">*</span></span>
+            </label>
+            <p class="hint" data-error-for="agree"></p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="nextBtn" type="button">下一步</button>
+          <button id="resetBtn" type="button" class="secondary">清空</button>
+        </div>
+        </div><!-- /step1 -->
+
+        <!-- ===== 第二步 ===== -->
+        <div id="step2" style="display:none;">
+          <div class="grid">
+
+            <div class="field full">
+              <label for="projOverview">项目概况 <span class="req">*</span></label>
+              <textarea id="projOverview" name="projOverview" rows="4" placeholder="请简要描述项目概况…"></textarea>
+              <p class="char-hint">（5-200字）<span class="char-count" id="projOverviewCount"></span></p>
+              <p class="hint" data-error-for="projOverview"></p>
+            </div>
+
+            <div class="field full">
+              <label for="projFeature">产品/服务特点 <span class="req">*</span></label>
+              <textarea id="projFeature" name="projFeature" rows="4" placeholder="请描述产品或服务的核心特点…"></textarea>
+              <p class="char-hint">（5-200字）<span class="char-count" id="projFeatureCount"></span></p>
+              <p class="hint" data-error-for="projFeature"></p>
+            </div>
+
+            <div class="field full">
+              <label for="projMarket">项目市场化能力 <span class="req">*</span></label>
+              <textarea id="projMarket" name="projMarket" rows="4" placeholder="请描述项目的市场化潜力与推进能力…"></textarea>
+              <p class="char-hint">（5-200字）<span class="char-count" id="projMarketCount"></span></p>
+              <p class="hint" data-error-for="projMarket"></p>
+            </div>
+
+            <div class="field full">
+              <label for="pdfFile">附件（商业企划书，PDF 格式，最大 10MB）</label>
+              <div class="upload-zone" id="uploadZone">
+                <input id="pdfFile" name="pdfFile" type="file" accept=".pdf" class="upload-input" />
+                <div class="upload-placeholder" id="uploadPlaceholder">
+                  <span class="upload-icon">📄</span>
+                  <span>点击选择 PDF，或将文件拖入此处</span>
+                </div>
+                <div class="upload-preview" id="uploadPreview" style="display:none;">
+                  <span class="upload-icon">✅</span>
+                  <span id="uploadFileName"></span>
+                  <button type="button" class="secondary upload-remove" id="uploadRemove">移除</button>
+                </div>
+              </div>
+              <p class="hint" data-error-for="pdfFile"></p>
+            </div>
+
+          </div>
+          <div class="actions">
+            <button id="next2Btn" type="button">下一步</button>
+            <button id="prevBtn" type="button" class="secondary">上一步</button>
+          </div>
+        </div><!-- /step2 -->
+
+        <!-- ===== 第三步 ===== -->
+        <div id="step3" style="display:none;">
+
+          <div class="grid" style="margin-bottom:24px;">
+            <div class="field full">
+              <label for="idNumber">身份证号 <span class="req">*</span></label>
+              <input id="idNumber" name="idNumber" type="text" placeholder="请输入身份证号" />
+              <p class="hint" data-error-for="idNumber"></p>
+            </div>
+            <div class="field full">
+              <label for="personalBio">个人简介及荣誉 <span class="req">*</span></label>
+              <textarea id="personalBio" name="personalBio" rows="4" placeholder="请填写个人简介及所获荣誉…"></textarea>
+              <p class="hint" data-error-for="personalBio"></p>
+            </div>
+          </div>
+
+          <!-- 教育经历 -->
+          <div class="exp-section">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-title">教育经历 <span class="req">*</span></h3>
+                <p class="exp-hint">（顺序填写，从本科开始填写，如无学位，可填写无）</p>
+              </div>
+              <button type="button" class="exp-add-btn" id="addEduBtn">+ 添加</button>
+            </div>
+            <div class="exp-table-wrap" id="eduTableWrap">
+              <table class="exp-table" id="eduTable">
+                <thead>
+                  <tr>
+                    <th>学习起止时间</th><th>学校</th><th>学位</th><th>专业</th><th>国家或地区</th><th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="eduTbody">
+                  <tr class="exp-empty-row" id="eduEmptyRow">
+                    <td colspan="6" class="exp-empty">暂无记录，请点击「+ 添加」</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="hint" data-error-for="eduList"></p>
+          </div>
+
+          <!-- 工作经历 -->
+          <div class="exp-section">
+            <div class="exp-header">
+              <h3 class="exp-title">工作经历 <span class="req">*</span></h3>
+              <div class="radio-group" style="flex-direction:row;gap:20px;margin:0;">
+                <label class="radio-option">
+                  <input type="radio" name="hasWork" value="yes" checked />
+                  <span>有工作经历</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="hasWork" value="no" />
+                  <span>无工作经历</span>
+                </label>
+              </div>
+            </div>
+            <div id="workTableArea">
+              <button type="button" class="exp-add-btn" id="addWorkBtn" style="margin-bottom:12px;">+ 添加</button>
+              <div class="exp-table-wrap">
+                <table class="exp-table">
+                  <thead>
+                    <tr>
+                      <th>工作起止时间</th><th>工作单位</th><th>担任职务</th><th>国家或地区</th><th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody id="workTbody">
+                    <tr class="exp-empty-row" id="workEmptyRow">
+                      <td colspan="5" class="exp-empty">暂无记录，请点击「+ 添加」</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p class="hint" data-error-for="workList"></p>
+          </div>
+
+          <div class="actions">
+            <button id="submitBtn" type="submit">提交申请</button>
+            <button id="prev2Btn" type="button" class="secondary">上一步</button>
+          </div>
+        </div><!-- /step3 -->
+
+        <!-- ===== 弹窗：教育经历 ===== -->
+        <div class="modal-overlay" id="eduModal" style="display:none;">
+          <div class="modal">
+            <h3 class="modal-title">添加教育经历</h3>
+            <div class="modal-body">
+
+              <div class="field">
+                <label>学习起止时间 <span class="req">*</span></label>
+                <div class="date-range">
+                  <input type="month" id="eduStart" placeholder="开始时间" />
+                  <span class="date-sep">—</span>
+                  <input type="month" id="eduEnd" placeholder="结束时间" />
+                  <label class="checkbox" style="white-space:nowrap;">
+                    <input type="checkbox" id="eduIsCurrent" />
+                    <span>至今</span>
+                  </label>
+                </div>
+                <p class="hint" data-error-for="eduTime"></p>
+              </div>
+
+              <div class="field">
+                <label for="eduSchool">学校 <span class="req">*</span></label>
+                <input type="text" id="eduSchool" placeholder="请输入学校名称" list="schoolList" />
+                <datalist id="schoolList">
+                  <option value="北京大学"></option><option value="清华大学"></option>
+                  <option value="复旦大学"></option><option value="上海交通大学"></option>
+                  <option value="浙江大学"></option><option value="中国人民大学"></option>
+                  <option value="南京大学"></option><option value="武汉大学"></option>
+                  <option value="Massachusetts Institute of Technology"></option>
+                  <option value="Stanford University"></option>
+                  <option value="Harvard University"></option>
+                  <option value="University of Oxford"></option>
+                  <option value="University of Cambridge"></option>
+                </datalist>
+                <p class="hint" data-error-for="eduSchool"></p>
+              </div>
+
+              <div class="field">
+                <label for="eduDegree">学位 <span class="req">*</span></label>
+                <select id="eduDegree">
+                  <option value="">选择学位</option>
+                  <option>大专</option><option>本科</option><option>硕士</option>
+                  <option>博士</option><option>博士后</option><option>无</option>
+                </select>
+                <p class="hint" data-error-for="eduDegree"></p>
+              </div>
+
+              <div class="field">
+                <label for="eduMajor">专业 <span class="req">*</span></label>
+                <input type="text" id="eduMajor" placeholder="请输入专业名称" />
+                <p class="hint" data-error-for="eduMajor"></p>
+              </div>
+
+              <div class="field">
+                <label for="eduCountry">国家或地区 <span class="req">*</span></label>
+                <select id="eduCountry">
+                  <option value="">请选择</option>
+                  <option>中国大陆</option><option>中国香港</option><option>中国澳门</option><option>中国台湾</option>
+                  <option>美国</option><option>英国</option><option>加拿大</option><option>澳大利亚</option>
+                  <option>日本</option><option>韩国</option><option>新加坡</option><option>德国</option>
+                  <option>法国</option><option>荷兰</option><option>瑞士</option><option>瑞典</option>
+                  <option>其他</option>
+                </select>
+                <p class="hint" data-error-for="eduCountry"></p>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="saveEduBtn">保存</button>
+              <button type="button" class="secondary" id="cancelEduBtn">取消</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== 弹窗：工作经历 ===== -->
+        <div class="modal-overlay" id="workModal" style="display:none;">
+          <div class="modal">
+            <h3 class="modal-title">添加工作经历</h3>
+            <div class="modal-body">
+
+              <div class="field">
+                <label>工作起止时间 <span class="req">*</span></label>
+                <div class="date-range">
+                  <input type="month" id="workStart" />
+                  <span class="date-sep">—</span>
+                  <input type="month" id="workEnd" />
+                  <label class="checkbox" style="white-space:nowrap;">
+                    <input type="checkbox" id="workIsCurrent" />
+                    <span>至今</span>
+                  </label>
+                </div>
+                <p class="hint" data-error-for="workTime"></p>
+              </div>
+
+              <div class="field">
+                <label for="workCompany">工作单位 <span class="req">*</span></label>
+                <input type="text" id="workCompany" placeholder="请输入工作单位" />
+                <p class="hint" data-error-for="workCompany"></p>
+              </div>
+
+              <div class="field">
+                <label for="workPosition">担任职务 <span class="req">*</span></label>
+                <input type="text" id="workPosition" placeholder="请输入担任职务" />
+                <p class="hint" data-error-for="workPosition"></p>
+              </div>
+
+              <div class="field">
+                <label for="workCountry">国家或地区 <span class="req">*</span></label>
+                <select id="workCountry">
+                  <option value="">请选择</option>
+                  <option>中国大陆</option><option>中国香港</option><option>中国澳门</option><option>中国台湾</option>
+                  <option>美国</option><option>英国</option><option>加拿大</option><option>澳大利亚</option>
+                  <option>日本</option><option>韩国</option><option>新加坡</option><option>德国</option>
+                  <option>法国</option><option>荷兰</option><option>瑞士</option><option>瑞典</option>
+                  <option>其他</option>
+                </select>
+                <p class="hint" data-error-for="workCountry"></p>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="saveWorkBtn">保存</button>
+              <button type="button" class="secondary" id="cancelWorkBtn">取消</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      </form>
+    </main>
+
+    <section class="card">
+      <div class="row">
+        <h2 class="card-title">已提交记录（本机）</h2>
+        <button id="clearAllBtn" type="button" class="danger">清空记录</button>
+      </div>
+      <div id="list" class="list"></div>
+      <p class="muted">提示：这些记录只保存在你的浏览器里，换电脑/清缓存会消失。</p>
+    </section>
+
+    <footer class="footer">
+      <small>© 你的项目名称</small>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
